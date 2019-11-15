@@ -85,6 +85,16 @@ class ScreeptSuite extends FunSuite {
     assert(eval("Jan ' ' CONCAT Skowronski CONCAT b := b")=="Jan Skowronski")
     assert(eval("50 npc _ CONCAT money CONCAT := ; 30 g := ; bob_money g +")=="80.0")
     assert(eval("50 npc _ money CONCAT3 := ; 30 g := ; bob_money g +")=="80.0")
-
   }
+
+  test("ObjectOperators"){
+    val ctx=mutable.Map[String,String]("name"->"Jan","turn"->"2","a"->"100","bob_name"->"Roberto","bob_money"->"100","npc"->"bob")
+    val eval=Screept.evaluate(Screept.getCoreOperators())(ctx) _
+    assert(eval("50 npc money OBJ := ; 30 g := bob_money g +")=="80.0")
+    assert(eval("bob_dupa VALZERO")=="0.0")
+    assert(eval("bob_money VALZERO")=="50")
+    assert(eval("bob_money ZERO bob_money")=="0")
+    assert(eval("bob_money ONE bob_money")=="1")
+  }
+
 }
