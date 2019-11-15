@@ -1,6 +1,8 @@
 package site.jans.screept
 import scala.collection.mutable
 
+
+// ONLY TO WORK ON VARIABLES NOT VALUES
 object ObjectOperators {
   def toValue(
       list: Seq[String],
@@ -32,6 +34,15 @@ object ObjectOperators {
     }),
     "ONE" -> Operator(1, (l, ctx) => {
       ctx(l(0)) = "1"; "1"
+    }),
+    "?EMPTY" -> Operator(1, (l, ctx) => {
+      if (BasicOperators.isEqual(toValue(Seq(l(0), "0"), ctx))) "1"
+      else {
+        toValue(l, ctx)(0) match {
+          case x if x == l(0) => "1"
+          case x              => "0"
+        }
+      }
     })
   )
 

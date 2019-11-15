@@ -88,13 +88,22 @@ class ScreeptSuite extends FunSuite {
   }
 
   test("ObjectOperators"){
-    val ctx=mutable.Map[String,String]("name"->"Jan","turn"->"2","a"->"100","bob_name"->"Roberto","bob_money"->"100","npc"->"bob")
+    val ctx=mutable.Map[String,String]("name"->"Jan","turn"->"2","a"->"100","bob_name"->"Roberto","bob_money"->"100","npc"->"bob","zero"->"0")
     val eval=Screept.evaluate(Screept.getCoreOperators())(ctx) _
     assert(eval("50 npc money OBJ := ; 30 g := bob_money g +")=="80.0")
     assert(eval("bob_dupa VALZERO")=="0.0")
     assert(eval("bob_money VALZERO")=="50")
     assert(eval("bob_money ZERO bob_money")=="0")
     assert(eval("bob_money ONE bob_money")=="1")
+    assert(eval("0 ?EMPTY")=="1")
+    assert(eval("0.0 ?EMPTY")=="1")
+    assert(eval("zero ?EMPTY")=="1")
+    assert(eval("nonexistent ?EMPTY")=="1")
+    assert(eval("bob money OBJ ?EMPTY")=="0")
+
+
+
+
   }
 
 }
