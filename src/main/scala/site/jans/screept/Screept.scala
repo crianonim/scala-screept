@@ -12,7 +12,7 @@ object Screept {
   type Context = mutable.Map[String, String]
   
   def getCoreOperators() = {
-    BasicOperators.operators ++ LogicOperators.operators ++ MathOperators.operators
+    BasicOperators.operators ++ LogicOperators.operators ++ MathOperators.operators ++ StringOperators.operators
   }
 
   def getValue(operand: String, ctx: Context) = {

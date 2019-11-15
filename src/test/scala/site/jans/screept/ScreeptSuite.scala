@@ -78,4 +78,13 @@ class ScreeptSuite extends FunSuite {
     assert(inter("Hello,#{name} it's #{turn}")=="Hello,Jan it's 2")
     assert(inter("Hello,#{'Lucas is stupid' 'Kasia is not' a 50 > ?} it's #{turn}")=="Hello,Lucas is stupid it's 2")
   }
+
+  test("StringOperators"){
+    val ctx=mutable.Map[String,String]("name"->"Jan","turn"->"2","a"->"100","bob_name"->"Roberto","bob_money"->"100","npc"->"bob")
+    val eval=Screept.evaluate(Screept.getCoreOperators())(ctx) _
+    assert(eval("Jan ' ' CONCAT Skowronski CONCAT b := b")=="Jan Skowronski")
+    assert(eval("50 npc _ CONCAT money CONCAT := ; 30 g := ; bob_money g +")=="80.0")
+    assert(eval("50 npc _ money CONCAT3 := ; 30 g := ; bob_money g +")=="80.0")
+
+  }
 }
