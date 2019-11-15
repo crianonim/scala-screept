@@ -3,7 +3,7 @@ import site.jans.screept
 import site.jans.screept._
 import scala.collection.mutable
 class ScreeptSuite extends FunSuite {
-
+  val ops=Screept.getCoreOperators()
   // just so I know how to use
   // test("An empty Set should have size 0") {
   //   assert(Set.empty.size == 0)
@@ -70,7 +70,12 @@ class ScreeptSuite extends FunSuite {
     assert(eval("1 1 & 0 1 & |")=="1")
     assert(eval("1 1 &  ( 0 1 & ) |")=="1")
     assert(eval("DEBUG 1")=="1")
-    assert(eval("( 1 1 & ) ( 0 1 & ) |")=="1")
+  }
 
+  test("interpolation works"){
+    val ctx=mutable.Map[String,String]("name"->"Jan","turn"->"2","a"->"100")
+    val inter=Screept.interpolate(ops)(ctx) _
+    assert(inter("Hello,#{name} it's #{turn}")=="Hello,Jan it's 2")
+    assert(inter("Hello,#{'Lucas is stupid' 'Kasia is not' a 50 > ?} it's #{turn}")=="Hello,Lucas is stupid it's 2")
   }
 }

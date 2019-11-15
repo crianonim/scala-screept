@@ -67,4 +67,12 @@ object Screept {
     }
     getValue(stack.pop(),ctx)
   }
+  def interpolate(operators: Map[String, Operator])(ctx: Context)(text: String) = {
+    val r = """#\{.*?}""".r
+    r.replaceAllIn(text,(m=>{
+      val s=m.toString()
+      val toInterpolate=s.substring(2,s.length()-1)
+      evaluate(operators)(ctx)(toInterpolate)
+    }))
+  }
 }
