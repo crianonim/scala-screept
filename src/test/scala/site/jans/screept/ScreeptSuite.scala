@@ -25,7 +25,7 @@ class ScreeptSuite extends FunSuite {
   }
   
   test("test MathOperators operators"){
-    val eval=Screept.evaluate(MathOperators.operators ++ BasicOperators.operators)(mutable.Map[String,String]()) _
+    val eval=Screept.evaluate(Screept.getCoreOperators())(mutable.Map[String,String]()) _
     assert(eval("3 2 + 5 =")=="1")
     assert(eval("3 -2 + 1 =")=="1")
     assert(eval("-3 -2 + -5 =")=="1")
@@ -45,7 +45,7 @@ class ScreeptSuite extends FunSuite {
 
   }
   test("test BasicOperators operators"){
-    val eval=Screept.evaluate(MathOperators.operators ++ BasicOperators.operators)(mutable.Map[String,String]()) _
+    val eval=Screept.evaluate(Screept.getCoreOperators())(mutable.Map[String,String]()) _
     assert(eval("Jan name := name =")=="1")
     assert(eval("Jan name := name Jan =")=="1")
     assert(eval("True False 1 1 = ?")=="True")
@@ -58,7 +58,7 @@ class ScreeptSuite extends FunSuite {
   }
 
   test("test LogicOperators operators"){
-    val eval=Screept.evaluate(LogicOperators.operators ++ BasicOperators.operators)(mutable.Map[String,String]()) _
+    val eval=Screept.evaluate(Screept.getCoreOperators())(mutable.Map[String,String]()) _
     assert(eval("1 1 &")=="1")
     assert(eval("0 1 &")=="0")
     assert(eval("0 0 &")=="0")

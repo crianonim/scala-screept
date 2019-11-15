@@ -10,6 +10,10 @@ case class Operator(
 
 object Screept {
   type Context = mutable.Map[String, String]
+  
+  def getCoreOperators() = {
+    BasicOperators.operators ++ LogicOperators.operators ++ MathOperators.operators
+  }
 
   def getValue(operand: String, ctx: Context) = {
     ctx.getOrElse(operand, operand)
