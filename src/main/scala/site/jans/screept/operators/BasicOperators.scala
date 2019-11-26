@@ -30,6 +30,10 @@ object BasicOperators {
     ";" -> noopOperator,
     "(" -> noopOperator,
     ")" -> noopOperator,
-    "DEBUG" -> Operator(0, (l, ctx) => {println(ctx);"<NIL>"})
+
+    "DEBUG" -> Operator(0, (l, ctx) => { println(ctx); "<NIL>" }),
+    "PRINT" -> Operator(1, (l, ctx) => {
+      val last = Screept.getValue(l(0), ctx); println("PRINT: " + last); last
+    })
   )
 }
