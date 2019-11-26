@@ -57,7 +57,7 @@ object Screept {
         val args = new Stack[String]()
         for (i <- (0 until operator.arity)) args.push(stack.pop())
         val result=operator.f(args.toList, ctx)
-        if (operator.arity>0){
+        if (result!="<NIL>"){
           stack.push(result)
         }
       } else {
